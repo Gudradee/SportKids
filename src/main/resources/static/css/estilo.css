@@ -1,0 +1,411 @@
+:root {
+    --sk-azul: #0d3b66;
+    --sk-azul-claro: #1d6fa5;
+    --sk-laranja: #f4a259;
+    --sk-laranja-escuro: #e88d3a;
+
+    --sk-fundo: #f5f5f7;
+    --sk-superficie: #ffffff;
+    --sk-texto: #1d1d1f;
+    --sk-texto-suave: #6e6e73;
+    --sk-borda: rgba(0, 0, 0, 0.08);
+
+    --sk-raio-xl: 28px;
+    --sk-raio-lg: 20px;
+    --sk-raio-md: 14px;
+    --sk-sombra: 0 4px 24px rgba(0, 0, 0, 0.06);
+    --sk-sombra-hover: 0 12px 40px rgba(0, 0, 0, 0.12);
+
+    --sk-fonte: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text",
+                "Inter", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+body {
+    font-family: var(--sk-fonte);
+    background-color: var(--sk-fundo);
+    color: var(--sk-texto);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    -webkit-font-smoothing: antialiased;
+    letter-spacing: -0.01em;
+}
+
+main {
+    flex: 1;
+}
+
+h1, h2, h3, .sk-titulo {
+    font-weight: 700;
+    letter-spacing: -0.025em;
+}
+
+a {
+    color: var(--sk-azul-claro);
+}
+
+.sk-nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(13, 59, 102, 0.92);
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+}
+
+.sk-nav .container {
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.sk-logo {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    background: var(--sk-laranja);
+    color: var(--sk-azul);
+    font-weight: 800;
+    font-size: 1.05rem;
+    letter-spacing: -0.02em;
+    text-decoration: none;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.18);
+    transition: transform .2s ease;
+}
+
+.sk-logo:hover {
+    transform: scale(1.06);
+    color: var(--sk-azul);
+}
+
+.sk-nav-link {
+    color: rgba(255, 255, 255, 0.85);
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+.sk-nav-link:hover {
+    color: #fff;
+}
+
+.sk-usuario {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    padding: .35rem .85rem;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.12);
+    color: #fff;
+    font-size: 0.9rem;
+}
+
+.sk-perfil {
+    padding: .1rem .55rem;
+    border-radius: 999px;
+    background: var(--sk-laranja);
+    color: var(--sk-azul);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: .02em;
+}
+
+.btn {
+    border-radius: 999px;
+    font-weight: 600;
+    padding: .55rem 1.3rem;
+    transition: transform .15s ease, box-shadow .15s ease, background-color .15s ease;
+}
+
+.btn:active {
+    transform: scale(0.97);
+}
+
+.btn-sm {
+    padding: .35rem .95rem;
+    font-size: .85rem;
+}
+
+.btn-sportkids {
+    background-color: var(--sk-laranja);
+    border-color: var(--sk-laranja);
+    color: var(--sk-azul);
+}
+
+.btn-sportkids:hover,
+.btn-sportkids:focus {
+    background-color: var(--sk-laranja-escuro);
+    border-color: var(--sk-laranja-escuro);
+    color: var(--sk-azul);
+}
+
+.btn-azul {
+    background-color: var(--sk-azul);
+    border-color: var(--sk-azul);
+    color: #fff;
+}
+
+.btn-azul:hover {
+    background-color: var(--sk-azul-claro);
+    border-color: var(--sk-azul-claro);
+    color: #fff;
+}
+
+.btn-suave {
+    background: rgba(0, 0, 0, 0.05);
+    border: none;
+    color: var(--sk-texto);
+}
+
+.btn-suave:hover {
+    background: rgba(0, 0, 0, 0.09);
+    color: var(--sk-texto);
+}
+
+.btn-perigo {
+    background: rgba(255, 59, 48, 0.1);
+    border: none;
+    color: #d70015;
+}
+
+.btn-perigo:hover {
+    background: rgba(255, 59, 48, 0.18);
+    color: #d70015;
+}
+
+.btn-contorno-claro {
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    color: #fff;
+    background: transparent;
+}
+
+.btn-contorno-claro:hover {
+    background: rgba(255, 255, 255, 0.12);
+    color: #fff;
+}
+
+.sk-hero {
+    background: linear-gradient(135deg, var(--sk-azul) 0%, var(--sk-azul-claro) 100%);
+    color: #fff;
+    border-radius: var(--sk-raio-xl);
+    padding: clamp(3.5rem, 9vw, 6.5rem) 1.5rem;
+    text-align: center;
+    box-shadow: var(--sk-sombra);
+}
+
+.sk-hero-titulo {
+    font-size: clamp(3.2rem, 10vw, 6.5rem);
+    font-weight: 800;
+    letter-spacing: -0.045em;
+    line-height: 1;
+    margin-bottom: 1rem;
+}
+
+.sk-hero-subtitulo {
+    font-size: clamp(1.15rem, 2.4vw, 1.6rem);
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.85);
+    letter-spacing: -0.015em;
+    margin: 0 auto;
+    max-width: 40ch;
+}
+
+.sk-pilula {
+    display: inline-block;
+    margin-top: 1.75rem;
+    padding: .4rem 1rem;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.14);
+    font-size: .9rem;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.sk-secao-titulo {
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    margin-bottom: 1.5rem;
+}
+
+.sk-card-produto {
+    background: var(--sk-superficie);
+    border-radius: var(--sk-raio-xl);
+    box-shadow: var(--sk-sombra);
+    overflow: hidden;
+    height: 100%;
+    transition: transform .25s ease, box-shadow .25s ease;
+}
+
+.sk-card-produto:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--sk-sombra-hover);
+}
+
+.sk-card-imagem {
+    aspect-ratio: 4 / 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(160deg, #eef2f7 0%, #e3e9f1 100%);
+    color: #a3b1c2;
+}
+
+.sk-card-corpo {
+    padding: 1.5rem 1.6rem 1.75rem;
+}
+
+.sk-tag {
+    display: inline-block;
+    padding: .25rem .75rem;
+    border-radius: 999px;
+    background: rgba(29, 111, 165, 0.1);
+    color: var(--sk-azul-claro);
+    font-size: .78rem;
+    font-weight: 600;
+    margin-bottom: .75rem;
+}
+
+.sk-card-nome {
+    font-size: 1.35rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: .35rem;
+}
+
+.sk-card-idade {
+    color: var(--sk-texto-suave);
+    margin-bottom: 1rem;
+}
+
+.sk-card-preco {
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--sk-azul);
+}
+
+.sk-painel {
+    background: var(--sk-superficie);
+    border-radius: var(--sk-raio-lg);
+    box-shadow: var(--sk-sombra);
+    padding: clamp(1.5rem, 4vw, 2.5rem);
+}
+
+.sk-cabecalho-pagina h1 {
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    margin-bottom: .25rem;
+}
+
+.sk-cabecalho-pagina p {
+    color: var(--sk-texto-suave);
+    margin: 0;
+}
+
+.form-label {
+    font-weight: 600;
+    font-size: .9rem;
+    margin-bottom: .4rem;
+}
+
+.form-control,
+.form-select {
+    border-radius: var(--sk-raio-md);
+    border: 1px solid var(--sk-borda);
+    background-color: #fbfbfd;
+    padding: .7rem 1rem;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: var(--sk-azul-claro);
+    box-shadow: 0 0 0 4px rgba(29, 111, 165, 0.15);
+    background-color: #fff;
+}
+
+.sk-busca {
+    border-radius: 999px;
+    min-width: 220px;
+}
+
+.alert {
+    border: none;
+    border-radius: var(--sk-raio-md);
+}
+
+.sk-login {
+    max-width: 420px;
+}
+
+.sk-login .sk-logo {
+    width: 64px;
+    height: 64px;
+    border-radius: 18px;
+    font-size: 1.5rem;
+}
+
+.sk-tabela {
+    margin: 0;
+}
+
+.sk-tabela thead th {
+    background: transparent;
+    color: var(--sk-texto-suave);
+    font-size: .78rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    border-bottom: 1px solid var(--sk-borda);
+    padding: 1rem 1.25rem;
+}
+
+.sk-tabela tbody td {
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid var(--sk-borda);
+    vertical-align: middle;
+}
+
+.sk-tabela tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.sk-tabela tbody tr:hover td {
+    background: #fafafc;
+}
+
+.sk-id {
+    color: var(--sk-texto-suave);
+    font-variant-numeric: tabular-nums;
+}
+
+.sk-erro-codigo {
+    font-size: clamp(5rem, 16vw, 9rem);
+    font-weight: 800;
+    letter-spacing: -0.05em;
+    line-height: 1;
+    background: linear-gradient(135deg, var(--sk-azul) 0%, var(--sk-azul-claro) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.sk-rodape {
+    color: var(--sk-texto-suave);
+    font-size: .85rem;
+    text-align: center;
+    padding: 2.5rem 0;
+}
+
+/*
+ * RESUMO: Esta e a folha de estilos do projeto, servida como arquivo estatico pelo Spring Boot a partir da
+ * pasta resources/static (endereco /css/estilo.css, liberado sem login no SecurityConfig). Ela funciona
+ * como um pequeno "design system" inspirado no estilo Apple, aplicado por cima do Bootstrap: define em
+ * variaveis CSS as cores da marca (azul e laranja), os tons neutros, os raios das bordas arredondadas, as
+ * sombras suaves e a tipografia do sistema (San Francisco no Mac, Segoe UI no Windows). A partir dessas
+ * variaveis estilizam-se todos os componentes usados nos templates Thymeleaf: a barra superior translucida
+ * com o logo "SK", os botoes em formato de pilula, o banner (hero) da landing page com o titulo grande, os
+ * cards de produto com espaco reservado para imagem, os paineis e formularios, a tabela da area restrita,
+ * a tela de login e as paginas de erro. Centralizar o visual aqui, em vez de espalhar estilos no HTML,
+ * deixa todas as telas consistentes e facilita a manutencao.
+ */

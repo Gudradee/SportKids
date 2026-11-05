@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('Acesso negado')}"></head>
+<body>
+<nav th:replace="~{fragments/layout :: navbar}"></nav>
+<main class="container py-5 text-center">
+    <div class="sk-erro-codigo mb-3">403</div>
+    <h1 class="h3">Acesso negado</h1>
+    <p class="text-secondary mb-4">Seu perfil não tem permissão para acessar esta página.</p>
+    <a class="btn btn-azul" th:href="@{/app/brinquedos}">Voltar à listagem</a>
+</main>
+<footer th:replace="~{fragments/layout :: rodape}"></footer>
+</body>
+</html>
+<!--/*
+RESUMO: Esta e a pagina de erro 403 (Forbidden) da interface web. O Spring Boot procura automaticamente
+templates na pasta templates/error/ com o nome do codigo HTTP; assim, quando um usuario com perfil USER
+tenta abrir uma tela exclusiva do ADMIN (por exemplo /app/admin/brinquedos/novo), o Spring Security nega o
+acesso e esta pagina amigavel e exibida no lugar da pagina de erro padrao, sem expor detalhes tecnicos.
+*/-->

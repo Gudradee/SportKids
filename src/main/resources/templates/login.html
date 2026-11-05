@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('Acessar painel')}"></head>
+<body>
+<nav th:replace="~{fragments/layout :: navbar}"></nav>
+
+<main class="container py-5">
+    <div class="sk-login mx-auto">
+        <div class="text-center mb-4">
+            <span class="sk-logo mb-3">SK</span>
+            <h1 class="h2">Acessar painel</h1>
+            <p class="text-secondary mb-0">Entre com seu usuário e senha.</p>
+        </div>
+
+        <div class="sk-painel">
+            <div th:if="${param.error}" class="alert alert-danger" role="alert">Usuário ou senha inválidos.</div>
+            <div th:if="${param.logout}" class="alert alert-success" role="alert">Você saiu do sistema.</div>
+
+            <form th:action="@{/login}" method="post">
+                <div class="mb-3">
+                    <label for="username" class="form-label">Usuário</label>
+                    <input id="username" class="form-control" type="text" name="username"
+                           autocomplete="username" required autofocus>
+                </div>
+                <div class="mb-4">
+                    <label for="password" class="form-label">Senha</label>
+                    <input id="password" class="form-control" type="password" name="password"
+                           autocomplete="current-password" required>
+                </div>
+                <button class="btn btn-azul w-100 py-2" type="submit">Entrar</button>
+            </form>
+        </div>
+
+        <p class="text-center mt-4"><a th:href="@{/}">← Voltar à página inicial</a></p>
+    </div>
+</main>
+
+<footer th:replace="~{fragments/layout :: rodape}"></footer>
+</body>
+</html>
+<!--/*
+RESUMO: Esta e a TELA DE LOGIN personalizada da aplicacao (rota GET "/login"), configurada no SecurityConfig
+com formLogin().loginPage("/login") e chamada pelo botao "Acessar painel" da barra superior. O formulario,
+dentro de um painel arredondado com o logo "SK", envia usuario e senha via POST para "/login", requisicao
+processada automaticamente pelo filtro do Spring Security, que valida as credenciais contra os usuarios em
+memoria (USER e ADMIN). O atributo th:action faz o Thymeleaf incluir um campo oculto com o token CSRF,
+protegendo contra envio forjado de formularios. A pagina le os parametros de URL ?error (login falhou) e
+?logout (saiu do sistema) para exibir mensagens. Por seguranca, as credenciais de teste NAO sao exibidas na
+tela: elas ficam documentadas no README.
+*/-->

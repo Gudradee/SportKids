@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('Não encontrado')}"></head>
+<body>
+<nav th:replace="~{fragments/layout :: navbar}"></nav>
+<main class="container py-5 text-center">
+    <div class="sk-erro-codigo mb-3">404</div>
+    <h1 class="h3">Não encontrado</h1>
+    <p class="text-secondary mb-4">A página ou o brinquedo solicitado não existe.</p>
+    <a class="btn btn-azul" th:href="@{/}">Ir para a página inicial</a>
+</main>
+<footer th:replace="~{fragments/layout :: rodape}"></footer>
+</body>
+</html>
+<!--/*
+RESUMO: Esta e a pagina de erro 404 (Not Found) da interface web, encontrada automaticamente pelo Spring
+Boot na pasta templates/error/. Ela e exibida quando o usuario acessa um endereco inexistente ou tenta
+editar/excluir um brinquedo cujo id nao existe (a BrinquedoNaoEncontradoException e anotada com
+@ResponseStatus(NOT_FOUND)), mostrando uma mensagem amigavel e um link de volta a pagina inicial.
+*/-->

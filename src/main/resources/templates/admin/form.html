@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head(${brinquedoId == null} ? 'Novo brinquedo' : 'Editar brinquedo')}"></head>
+<body>
+<nav th:replace="~{fragments/layout :: navbar}"></nav>
+
+<main class="container py-4 py-md-5" style="max-width: 680px">
+    <div class="sk-cabecalho-pagina mb-4">
+        <h1 th:text="${brinquedoId == null} ? 'Novo brinquedo' : 'Editar brinquedo #' + ${brinquedoId}">Brinquedo</h1>
+        <p>Preencha os dados do produto. Todos os campos são obrigatórios.</p>
+    </div>
+
+    <form th:action="${brinquedoId == null} ? @{/app/admin/brinquedos} : @{/app/admin/brinquedos/{id}(id=${brinquedoId})}"
+          th:object="${brinquedo}" method="post" class="sk-painel" novalidate>
+
+        <div th:if="${#fields.hasErrors('*')}" class="alert alert-danger">Corrija os campos destacados.</div>
+
+        <div class="mb-3">
+            <label for="nome" class="form-label">Nome</label>
+            <input id="nome" class="form-control" th:field="*{nome}" th:errorclass="is-invalid" maxlength="100">
+            <div class="invalid-feedback" th:errors="*{nome}"></div>
+        </div>
+
+        <div class="mb-3">
+            <label for="tipo" class="form-label">Tipo</label>
+            <input id="tipo" class="form-control" th:field="*{tipo}" th:errorclass="is-invalid"
+                   maxlength="50" placeholder="Ex.: Bola, Raquete, Patins">
+            <div class="invalid-feedback" th:errors="*{tipo}"></div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label for="classificacao" class="form-label">Classificação (idade mínima, 0 a 15)</label>
+                <input id="classificacao" class="form-control" type="number" min="0" max="15"
+                       th:field="*{classificacao}" th:errorclass="is-invalid">
+                <div class="invalid-feedback" th:errors="*{classificacao}"></div>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="tamanho" class="form-label">Tamanho</label>
+                <select id="tamanho" class="form-select" th:field="*{tamanho}" th:errorclass="is-invalid">
+                    <option value="">Selecione...</option>
+                    <option value="P">P</option>
+                    <option value="M">M</option>
+                    <option value="G">G</option>
+                    <option value="UNICO">ÚNICO</option>
+                </select>
+                <div class="invalid-feedback" th:errors="*{tamanho}"></div>
+            </div>
+        </div>
+
+        <div class="mb-4">
+            <label for="preco" class="form-label">Preço (R$)</label>
+            <input id="preco" class="form-control" type="number" step="0.01" min="0.01"
+                   th:field="*{preco}" th:errorclass="is-invalid">
+            <div class="invalid-feedback" th:errors="*{preco}"></div>
+        </div>
+
+        <div class="d-flex gap-2 justify-content-end">
+            <a class="btn btn-suave" th:href="@{/app/brinquedos}">Cancelar</a>
+            <button type="submit" class="btn btn-azul">Salvar</button>
+        </div>
+    </form>
+</main>
+
+<footer th:replace="~{fragments/layout :: rodape}"></footer>
+</body>
+</html>
+<!--/*
+RESUMO: Este e o FORMULARIO de cadastro e edicao de brinquedos, exclusivo do perfil ADMIN (fica em
+/app/admin/**, rota bloqueada para USER pelo SecurityConfig). O mesmo template serve aos dois casos: se a
+variavel ${brinquedoId} for nula, o formulario e de criacao e envia para POST /app/admin/brinquedos; se
+existir, e de edicao e envia para POST /app/admin/brinquedos/{id}. O th:object liga o formulario ao DTO
+BrinquedoRequest e cada th:field preenche/le um atributo dele. Quando o Bean Validation reprova algum campo
+no servidor, o WebController devolve esta mesma pagina e o Thymeleaf mostra as mensagens com th:errors,
+destacando o campo em vermelho (th:errorclass). O atributo novalidate desliga a validacao do navegador para
+que as regras do servidor sejam sempre a fonte da verdade (e aparecam no video). O token CSRF e incluido
+automaticamente pelo th:action.
+*/-->

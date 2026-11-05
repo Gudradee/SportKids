@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="~{fragments/layout :: head('Brinquedos')}"></head>
+<body>
+<nav th:replace="~{fragments/layout :: navbar}"></nav>
+
+<main class="container py-4 py-md-5">
+    <div th:replace="~{fragments/layout :: mensagens}"></div>
+
+    <div class="d-flex flex-wrap justify-content-between align-items-end gap-3 mb-4">
+        <div class="sk-cabecalho-pagina">
+            <h1>Brinquedos</h1>
+            <p th:text="${#lists.size(brinquedos)} + ' itens no catálogo'">0 itens no catálogo</p>
+        </div>
+        <div class="d-flex flex-wrap gap-2">
+            <form th:action="@{/app/brinquedos}" method="get" class="d-flex gap-2">
+                <input class="form-control sk-busca" type="search" name="tipo" placeholder="Filtrar por tipo"
+                       th:value="${tipo}">
+                <button class="btn btn-suave" type="submit">Filtrar</button>
+            </form>
+            <a sec:authorize="hasRole('ADMIN')" class="btn btn-sportkids text-nowrap"
+               th:href="@{/app/admin/brinquedos/novo}">+ Novo brinquedo</a>
+        </div>
+    </div>
+
+    <div class="sk-painel p-0 overflow-hidden">
+        <div class="table-responsive">
+            <table class="table sk-tabela">
+                <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nome</th>
+                    <th>Tipo</th>
+                    <th>Classificação</th>
+                    <th>Tamanho</th>
+                    <th>Preço</th>
+                    <th sec:authorize="hasRole('ADMIN')" class="text-end">Ações</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:if="${#lists.isEmpty(brinquedos)}">
+                    <td colspan="7" class="text-center text-secondary py-5">Nenhum brinquedo encontrado.</td>
+                </tr>
+                <tr th:each="b : ${brinquedos}">
+                    <td class="sk-id" th:text="${b.id()}">1</td>
+                    <td class="fw-semibold" th:text="${b.nome()}">Nome</td>
+                    <td><span class="sk-tag mb-0" th:text="${b.tipo()}">Tipo</span></td>
+                    <td th:text="${b.classificacao()} + '+ anos'">0+ anos</td>
+                    <td th:text="${b.tamanho()}">M</td>
+                    <td class="fw-semibold"
+                        th:text="'R$ ' + ${#numbers.formatDecimal(b.preco(), 1, 'POINT', 2, 'COMMA')}">R$ 0,00</td>
+                    <td sec:authorize="hasRole('ADMIN')" class="text-end text-nowrap">
+                        <a class="btn btn-sm btn-suave"
+                           th:href="@{/app/admin/brinquedos/{id}/editar(id=${b.id()})}">Editar</a>
+                        <form th:action="@{/app/admin/brinquedos/{id}/excluir(id=${b.id()})}" method="post"
+                              class="d-inline" onsubmit="return confirm('Excluir este brinquedo?')">
+                            <button type="submit" class="btn btn-sm btn-perigo">Excluir</button>
+                        </form>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</main>
+
+<footer th:replace="~{fragments/layout :: rodape}"></footer>
+</body>
+</html>
+<!--/*
+RESUMO: Esta e a pagina da AREA LOGADA (rota "/app/brinquedos"), acessivel a USER e ADMIN. Ela exibe, dentro
+de um painel arredondado, uma tabela com todos os brinquedos da tabela TDS_TB_Brinquedos (lista enviada
+pelo WebController e percorrida com th:each), alem da quantidade de itens e de um campo de filtro por tipo.
+A interface se adapta ao perfil de quem esta logado usando sec:authorize="hasRole('ADMIN')": somente o
+ADMIN ve o botao "+ Novo brinquedo" e a coluna "Acoes" com os botoes Editar e Excluir; o USER apenas
+visualiza. Esconder os botoes e so a camada visual: a protecao real esta no SecurityConfig, que bloqueia
+/app/admin/** para quem nao e ADMIN. A exclusao e feita por POST (com token CSRF) e pede confirmacao no
+navegador antes de enviar.
+*/-->

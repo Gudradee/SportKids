@@ -1,0 +1,11 @@
+AC4 - Spring Boot - Brinquedos Esportivos (SportKids)
+
+Integrantes:
+Gustavo Andrade Amorim - RA 202508703858
+João Pedro Goes - RA 202503436541
+
+GitHub (README completo): https://github.com/Gudradee/SportKids
+IDE utilizada: IntelliJ IDEA
+Vídeo (YouTube não listado): <link a adicionar>
+
+Credenciais de teste: user / user123 (USER)  e  admin / admin123 (ADMIN)

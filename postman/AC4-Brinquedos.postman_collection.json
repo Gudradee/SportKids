@@ -1,0 +1,676 @@
+{
+  "info": {
+    "name": "AC4 - Brinquedos Esportivos (SportKids)",
+    "description": "CRUD de /brinquedos com Spring Security (Basic Auth). Execute na ordem (Runner). O passo 05 guarda o id criado em {{novoId}}, usado nos passos 08-10.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "01 - READ: listar todos (USER) -> 200",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/brinquedos",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "brinquedos"
+          ]
+        },
+        "description": "Lista os 4 brinquedos iniciais da tabela TDS_TB_Brinquedos.",
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "username",
+              "value": "{{userLogin}}",
+              "type": "string"
+            },
+            {
+              "key": "password",
+              "value": "{{userSenha}}",
+              "type": "string"
+            }
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status 200\", function () { pm.response.to.have.status(200); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "02 - READ: buscar id 1 (USER) -> 200",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/brinquedos/1",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "brinquedos",
+            "1"
+          ]
+        },
+        "description": "Busca um brinquedo pelo id.",
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "username",
+              "value": "{{userLogin}}",
+              "type": "string"
+            },
+            {
+              "key": "password",
+              "value": "{{userSenha}}",
+              "type": "string"
+            }
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status 200\", function () { pm.response.to.have.status(200); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "03 - READ: id inexistente (USER) -> 404",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/brinquedos/999",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "brinquedos",
+            "999"
+          ]
+        },
+        "description": "Id que nao existe: JSON de erro 404.",
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "username",
+              "value": "{{userLogin}}",
+              "type": "string"
+            },
+            {
+              "key": "password",
+              "value": "{{userSenha}}",
+              "type": "string"
+            }
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status 404\", function () { pm.response.to.have.status(404); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "04 - READ: filtrar por tipo (USER) -> 200",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/brinquedos?tipo=bola",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "brinquedos"
+          ],
+          "query": [
+            {
+              "key": "tipo",
+              "value": "bola"
+            }
+          ]
+        },
+        "description": "Query method findByTipoIgnoreCase.",
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "username",
+              "value": "{{userLogin}}",
+              "type": "string"
+            },
+            {
+              "key": "password",
+              "value": "{{userSenha}}",
+              "type": "string"
+            }
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status 200\", function () { pm.response.to.have.status(200); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "05 - CREATE: novo brinquedo (ADMIN) -> 201",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/brinquedos",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "brinquedos"
+          ]
+        },
+        "description": "Cria e devolve 201 + header Location. Guarda o id em {{novoId}}.",
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "username",
+              "value": "{{adminLogin}}",
+              "type": "string"
+            },
+            {
+              "key": "password",
+              "value": "{{adminSenha}}",
+              "type": "string"
+            }
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nome\": \"Bola de Vôlei Kids\",\n  \"tipo\": \"Bola\",\n  \"classificacao\": 8,\n  \"tamanho\": \"M\",\n  \"preco\": 79.9\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status 201\", function () { pm.response.to.have.status(201); });",
+              "pm.collectionVariables.set(\"novoId\", pm.response.json().id);"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "06 - CREATE: USER sem permissao -> 403",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/brinquedos",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "brinquedos"
+          ]
+        },
+        "description": "Perfil USER nao pode criar.",
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "username",
+              "value": "{{userLogin}}",
+              "type": "string"
+            },
+            {
+              "key": "password",
+              "value": "{{userSenha}}",
+              "type": "string"
+            }
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nome\": \"Bola de Vôlei Kids\",\n  \"tipo\": \"Bola\",\n  \"classificacao\": 8,\n  \"tamanho\": \"M\",\n  \"preco\": 79.9\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status 403\", function () { pm.response.to.have.status(403); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "07 - CREATE: dados invalidos (ADMIN) -> 400",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/brinquedos",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "brinquedos"
+          ]
+        },
+        "description": "Bean Validation devolve mapa de erros por campo.",
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "username",
+              "value": "{{adminLogin}}",
+              "type": "string"
+            },
+            {
+              "key": "password",
+              "value": "{{adminSenha}}",
+              "type": "string"
+            }
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nome\": \"\",\n  \"tipo\": \"Bola\",\n  \"classificacao\": 20,\n  \"tamanho\": \"XX\",\n  \"preco\": 0\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status 400\", function () { pm.response.to.have.status(400); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "08 - UPDATE: atualizar id {{novoId}} (ADMIN) -> 200",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/brinquedos/{{novoId}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "brinquedos",
+            "{{novoId}}"
+          ]
+        },
+        "description": "Atualiza o brinquedo criado no passo 05.",
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "username",
+              "value": "{{adminLogin}}",
+              "type": "string"
+            },
+            {
+              "key": "password",
+              "value": "{{adminSenha}}",
+              "type": "string"
+            }
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nome\": \"Bola de Vôlei Kids Pro\",\n  \"tipo\": \"Bola\",\n  \"classificacao\": 9,\n  \"tamanho\": \"G\",\n  \"preco\": 99.9\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status 200\", function () { pm.response.to.have.status(200); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "09 - DELETE: excluir id {{novoId}} (ADMIN) -> 204",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/brinquedos/{{novoId}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "brinquedos",
+            "{{novoId}}"
+          ]
+        },
+        "description": "Exclui pelo id.",
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "username",
+              "value": "{{adminLogin}}",
+              "type": "string"
+            },
+            {
+              "key": "password",
+              "value": "{{adminSenha}}",
+              "type": "string"
+            }
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status 204\", function () { pm.response.to.have.status(204); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "10 - DELETE: excluir id {{novoId}} de novo (ADMIN) -> 404",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/brinquedos/{{novoId}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "brinquedos",
+            "{{novoId}}"
+          ]
+        },
+        "description": "Ja foi excluido.",
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "username",
+              "value": "{{adminLogin}}",
+              "type": "string"
+            },
+            {
+              "key": "password",
+              "value": "{{adminSenha}}",
+              "type": "string"
+            }
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status 404\", function () { pm.response.to.have.status(404); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "11 - READ: sem autenticacao -> 401",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/brinquedos",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "brinquedos"
+          ]
+        },
+        "description": "Sem Basic Auth: 401.",
+        "auth": {
+          "type": "noauth"
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status 401\", function () { pm.response.to.have.status(401); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "12 - EXTRA: cadastro em lote (ADMIN) -> 201",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/brinquedos/lote",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "brinquedos",
+            "lote"
+          ]
+        },
+        "description": "Lista recebida -> List no programa -> saveAll em uma transacao (commit unico).",
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "username",
+              "value": "{{adminLogin}}",
+              "type": "string"
+            },
+            {
+              "key": "password",
+              "value": "{{adminSenha}}",
+              "type": "string"
+            }
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"brinquedos\": [\n    {\n      \"nome\": \"Skate Iniciante\",\n      \"tipo\": \"Skate\",\n      \"classificacao\": 8,\n      \"tamanho\": \"M\",\n      \"preco\": 189.9\n    },\n    {\n      \"nome\": \"Kit Peteca\",\n      \"tipo\": \"Peteca\",\n      \"classificacao\": 4,\n      \"tamanho\": \"UNICO\",\n      \"preco\": 24.9\n    }\n  ]\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status 201\", function () { pm.response.to.have.status(201); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "13 - EXTRA: faixa de preco via EntityManager (USER) -> 200",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/brinquedos/faixa-preco?min=50&max=300",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "brinquedos",
+            "faixa-preco"
+          ],
+          "query": [
+            {
+              "key": "min",
+              "value": "50"
+            },
+            {
+              "key": "max",
+              "value": "300"
+            }
+          ]
+        },
+        "description": "Consulta JPQL executada diretamente pelo EntityManager (BrinquedoRepositoryImpl).",
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "username",
+              "value": "{{userLogin}}",
+              "type": "string"
+            },
+            {
+              "key": "password",
+              "value": "{{userSenha}}",
+              "type": "string"
+            }
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status 200\", function () { pm.response.to.have.status(200); });"
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080"
+    },
+    {
+      "key": "userLogin",
+      "value": "user"
+    },
+    {
+      "key": "userSenha",
+      "value": "user123"
+    },
+    {
+      "key": "adminLogin",
+      "value": "admin"
+    },
+    {
+      "key": "adminSenha",
+      "value": "admin123"
+    },
+    {
+      "key": "novoId",
+      "value": "5"
+    }
+  ]
+}
