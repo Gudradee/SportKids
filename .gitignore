@@ -39,6 +39,7 @@ build/
 GUIA_DO_CODIGO.md
 ROTEIRO_VIDEO.md
 ROTEIRO_POSTMAN.md
+ROTEIRO_INTERFACE.md
 ROTEIRO_*.md
 POSTMAN_VIDEO.postman_collection.json
 *.mp4

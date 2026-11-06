@@ -7,6 +7,7 @@ Projeto da AC4 da disciplina de Programação com Spring Boot do Ibmec.
 | **Integrantes** | Gustavo Andrade Amorim, RA 202508703858 · João Pedro Goes, RA 202503436541 |
 | **IDE utilizada** | IntelliJ IDEA |
 | **Repositório** | https://github.com/Gudradee/SportKids |
+| **Vídeo** | [Google Drive](https://drive.google.com/file/d/1sHouJQgfaMelctDIyp8EfjzxEBNccuZa/view?usp=sharing) |
 
 ## 1. Descrição do projeto
 
@@ -363,4 +364,4 @@ Execução de todos os testes no IntelliJ, com os 12 aprovados: os 11 da API, da
 
 ## 12. Vídeo
 
-O link do vídeo de apresentação será adicionado aqui em breve.
+O vídeo de apresentação, com a explicação do código, os testes no Postman e a interface web funcionando, está no Google Drive: [assistir ao vídeo](https://drive.google.com/file/d/1sHouJQgfaMelctDIyp8EfjzxEBNccuZa/view?usp=sharing).

@@ -6,6 +6,6 @@ João Pedro Goes - RA 202503436541
 
 GitHub (README completo): https://github.com/Gudradee/SportKids
 IDE utilizada: IntelliJ IDEA
-Vídeo (YouTube não listado): <link a adicionar>
+Vídeo (Google Drive): https://drive.google.com/file/d/1sHouJQgfaMelctDIyp8EfjzxEBNccuZa/view?usp=sharing
 
 Credenciais de teste: user / user123 (USER)  e  admin / admin123 (ADMIN)
